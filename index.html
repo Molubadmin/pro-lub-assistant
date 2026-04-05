@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRO-LUB | Molub Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0000FA;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+
+  .gear-wrap {
+    width: 42px;
+    height: 42px;
+    background: #000;
+    border: 2px solid #0000FA;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(0,0,250,0.5);
+  }
+
+  .gear-wrap svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    animation: gear-spin 5s linear infinite;
+  }
+
+  @keyframes gear-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .header-text { display: flex; flex-direction: column; }
+
+  .header-text .brand {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ff88;
+    animation: blink 1.5s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity:1; } 50% { opacity:0.15; }
+  }
+
+  .header-text .sub {
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── CHAT BOX ── */
+  #pl-chat-box {
+    flex: 1;
+    padding: 16px 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    scroll-behavior: smooth;
+  }
+
+  #pl-chat-box::-webkit-scrollbar { width: 4px; }
+  #pl-chat-box::-webkit-scrollbar-track { background: transparent; }
+  #pl-chat-box::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+  }
+
+  .pl-welcome {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 14px 16px;
+    border-radius: 0 16px 16px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 4px 6px;
+  }
+
+  .pl-welcome strong { font-weight: 600; }
+
+  /* ── INPUT AREA ── */
+  .input-area {
+    padding: 14px 12px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    gap: 10px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+  }
+
+  #pl-input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    caret-color: #fff;
+  }
+
+  #pl-input::placeholder { color: rgba(255,255,255,0.4); }
+
+  #pl-input:focus {
+    border-color: #fff;
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 0 16px rgba(255,255,255,0.15);
+  }
+
+  #pl-send-btn {
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    color: #0000FA;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  #pl-send-btn:hover {
+    transform: scale(1.1) translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  #pl-send-btn:active { transform: scale(0.95); }
+
+  .footer {
+    text-align: center;
+    padding: 6px;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.22);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="gear-wrap">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.92c.04-.34.07-.69.07-1.08s-.03-.74-.07-1.08l2.32-1.8c.21-.16.27-.45.14-.69l-2.2-3.8c-.13-.24-.42-.32-.66-.24l-2.74 1.1c-.57-.43-1.18-.8-1.86-1.07l-.42-2.9c-.04-.26-.27-.46-.54-.46h-4.4c-.27 0-.5.2-.54.46l-.42 2.9c-.68.27-1.29.64-1.86 1.07l-2.74-1.1c-.25-.1-.53 0-.66.24l-2.2 3.8c-.13.24-.07.53.14.69l2.32 1.8c-.04.34-.07.69-.07 1.08s.03.74.07 1.08l-2.32 1.8c-.21.16-.27.45-.14.69l2.2 3.8c.13.24.42.32.66.24l2.74-1.1c.57.43 1.18.8 1.86 1.07l.42 2.9c.04.26.27.46.54.46h4.4c.27 0 .5-.2.54-.46l.42-2.9c.68-.27 1.29-.64 1.86-1.07l2.74 1.1c.25.1.53 0 .66-.24l2.2-3.8c.13-.24.07-.53-.14-.69l-2.32-1.8z"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <span class="brand"><span class="dot"></span>PRO-LUB</span>
+    <span class="sub">Molub Academy · Asistente Técnico</span>
+  </div>
+</div>
+
+<!-- MENSAJES -->
+<div id="pl-chat-box">
+  <div class="pl-welcome">
+    <strong>Monitorización avanzada de lubricación en línea.</strong><br>
+    Soy tu asistente técnico de Molub Academy.<br><br>
+    ¿Qué diagnóstico técnico realizamos hoy, Ingeniero? 🔧
+  </div>
+</div>
+
+<!-- INPUT -->
+<div class="input-area">
+  <input
+    type="text"
+    id="pl-input"
+    placeholder="Escribe tu consulta técnica..."
+    onkeypress="if(event.key==='Enter') enviarMensaje()"
+  >
+  <button id="pl-send-btn" onclick="enviarMensaje()">➤</button>
+</div>
+
+<div class="footer">Molub Academy · PRO-LUB v3.0 · Sistema Activo</div>
+
+<script>
+  async function enviarMensaje() {
+    const input = document.getElementById('pl-input');
+    const chat = document.getElementById('pl-chat-box');
+    const valor = input.value.trim();
+    if (!valor) return;
+    chat.innerHTML += `<div class="pl-user-msg" style="background:rgba(255,255,255,0.2); color:white; padding:12px; margin:8px; border-radius:15px 15px 0 15px; align-self:flex-end; border:1px solid white;">${valor}</div>`;
+    input.value = '';
+    chat.scrollTop = chat.scrollHeight;
+    const loadingId = 'loading-' + Date.now();
+    chat.innerHTML += `<div id="${loadingId}" style="color:white; padding:12px; opacity:0.8; font-style:italic;">Analizando parámetros...</div>`;
+    chat.scrollTop = chat.scrollHeight;
+    try {
+      const r = await fetch('https://pro-lub-assistant.onrender.com/ask', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: valor })
+      });
+      const d = await r.json();
+      document.getElementById(loadingId).remove();
+      chat.innerHTML += `<div class="pl-bot-msg" style="background:white; color:#0000fa; padding:12px; margin:8px; border-radius:15px 15px 15px 0; font-weight:500; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">${d.answer}</div>`;
+    } catch (e) {
+      document.getElementById(loadingId).innerText = 'Error de conexión con el núcleo.';
+    }
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
